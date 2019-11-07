@@ -1,4 +1,4 @@
-# Minio on Render
+# MinIO on Render
 
 This template repository can be used to run [MinIO](https://min.io) on Render in a single click. It features SSD storage with automatic backups and fully managed TLS for your MinIO object store.
 
