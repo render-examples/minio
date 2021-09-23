@@ -1,6 +1,7 @@
 services:
 - type: web
   name: minio
+  healthCheckPath: /minio/health/live
   env: docker
   dockerfilePath: ./Dockerfile
   dockerContext: .
