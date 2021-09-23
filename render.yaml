@@ -10,5 +10,5 @@ services:
   envVars:
   - key: MINIO_ROOT_USER
     generateValue: true
-  - key: MINIO_ROOT_USER
+  - key: MINIO_ROOT_PASSWORD
     generateValue: true
