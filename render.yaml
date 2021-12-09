@@ -8,7 +8,7 @@ services:
     name: data
     mountPath: /data
   envVars:
-  - key: MINIO_ACCESS_KEY
+  - key: MINIO_ROOT_USER
     generateValue: true
-  - key: MINIO_SECRET_KEY
+  - key: MINIO_ROOT_PASSWORD
     generateValue: true
