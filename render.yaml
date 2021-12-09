@@ -7,6 +7,7 @@ services:
   disk:
     name: data
     mountPath: /data
+  healthCheckPath: /minio/health/live
   envVars:
   - key: MINIO_ROOT_USER
     generateValue: true
