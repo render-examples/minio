@@ -13,3 +13,5 @@ services:
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
+  - key: PORT
+    value: 10000
