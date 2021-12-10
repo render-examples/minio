@@ -12,11 +12,13 @@ The MinIO web console and MinIO API listen on different ports. Because Render on
 
 ## Running Locally
 
-if you are having problems and want to debug, you can run the container locally.
+Use the following commands to run the container locally similar to how it's run on Render.
 
 ```bash
+git clone git@github.com:render-examples/minio.git
+cd minio
 docker build -t minio .
-docker run -p 9000:9000 -p 10000:10000 -e MINIO_ROOT_USER=admin -e MINIO_ROOT_PASSWORD=secretpwd minio
+docker run -p 9000:9000 -p 10000:10000 -v data:/data -e MINIO_ROOT_USER=admin -e MINIO_ROOT_PASSWORD=secretpwd minio
 ```
 
-Then go to [http://localhost:9000](http://localhost:9000) in a browser and login with the credentials used in the docker run command.
+Then go to [http://localhost:9000](http://localhost:9000) in a browser and login with the credentials specified in the `docker run` command.
