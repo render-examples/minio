@@ -8,8 +8,11 @@ services:
   disk:
     name: data
     mountPath: /data
+  healthCheckPath: /minio/health/live
   envVars:
   - key: MINIO_ROOT_USER
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
+  - key: PORT
+    value: 10000
