@@ -4,7 +4,7 @@ This template repository can be used to run [MinIO](https://min.io) on Render in
 
 Click the button below to deploy MinIO to your Render account:
 
-[![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/iac/new?repoOwner=render-examples&repoName=minio&branch=master&provider=GITHUB)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
 This will create a public MinIO instance with automatically generated username and password for the web console. You can see their values under the Environment section of your Render service.
 
