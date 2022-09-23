@@ -5,6 +5,7 @@ services:
   env: docker
   dockerfilePath: ./Dockerfile
   dockerContext: .
+  autoDeploy: false
   disk:
     name: data
     mountPath: /data
