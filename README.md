@@ -1,24 +1,13 @@
 # MinIO on Render
 
-This template repository can be used to run [MinIO](https://min.io) on Render in a single click. It features SSD storage with automatic backups and fully managed TLS for your MinIO object store.
+This template repository can be used to run a single node [MinIO](https://min.io) server on Render in a single click. It features SSD storage with automatic backups and fully managed TLS for MinIO.
 
 Click the button below to deploy MinIO to your Render account:
 
 [![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-This will create a public MinIO instance with automatically generated username and password for the web console. You can see their values under the Environment section of your Render service.
+This will create two web services:
+* A public MinIO S3-compatible API server with automatically generated username and password environment variables. This server does not include the MinIO web console, which is a separate service. Admin credentials can be found under **Environment** in the Render dashboard.
+* A web console for MinIO. You can use the username and password generated for the API server to log in, but MinIO does not recommend it for security reasons. Instead, create a new user with the [`mc`](https://min.io/docs/minio/linux/reference/minio-mc.html) CLI. You can use the instructions at https://github.com/minio/console#setup.
 
-The MinIO web console and MinIO API listen on different ports. Because Render only exposes one port publicly for Web Services, you must decide which you want to expose. By default, the console is exposed publicly. Change `PORT` to `9000` to switch to the API being exposed publicly. You can see (or modify) the console and API port definitions in this repository's `entrypoint.sh` file.
-
-## Running Locally
-
-Use the following commands to run the container locally similar to how it's run on Render.
-
-```bash
-git clone git@github.com:render-examples/minio.git
-cd minio
-docker build -t minio .
-docker run -p 9000:9000 -p 10000:10000 -v data:/data -e MINIO_ROOT_USER=admin -e MINIO_ROOT_PASSWORD=secretpwd minio
-```
-
-Then go to [http://localhost:9000](http://localhost:9000) in a browser and login with the credentials specified in the `docker run` command.
+The two services above are defined in `render.yaml` and can be customized as needed. Note that you don't need to run the console; you can deploy MinIO and interact with it using `mc`, MinIO's command line tool linked above. To do this, remove the `minio-console` web service from `render.yaml`.
