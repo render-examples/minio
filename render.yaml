@@ -4,35 +4,48 @@ services:
   healthCheckPath: /minio/health/live
   runtime: image
   image:
-    url: docker.io/minio/minio:RELEASE.2023-08-04T17-40-21Z.hotfix.04968f7ec
-  dockerCommand: minio server /data
+    url: docker.io/minio/minio:latest
+  dockerCommand: minio server /data --address $HOST:$PORT --console-address $HOST:$CONSOLE_PORT
+  # Use the following 'dockerCommand' if removing the 'minio-console'
+  # web service
+  # dockerCommand: minio server /data --address $HOST:$PORT
   autoDeploy: false
   disk:
     name: data
+    sizeGB: 5
     mountPath: /data
   envVars:
   - key: MINIO_ROOT_USER
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
-  - key: MINIO_BROWSER
-    value: "off"
+  - key: HOST
+    value: "0.0.0.0"
+  - key: PORT
+    value: 9000
+  - key: CONSOLE_PORT
+    value: 9090
+  # Uncomment the following key/value pair if you are removing the
+  # 'minio-console' web service
+  # - key: MINIO_BROWSER
+  #   value: "off"
+  
+
 - type: web
   name: minio-console
-  runtime: image
-  image:
-    url: minio/console:v0.30.0
-  dockerCommand: /bin/bash -c CONSOLE_MINIO_SERVER=https://$MINIO_HOST.onrender.com ./console server --port $PORT
-  autoDeploy: false
+  runtime: docker
+  dockerContext: /
+  dockerfilePath: ./Dockerfile
   envVars:
-  - key: CONSOLE_PBKDF_PASSPHRASE
-    generateValue: true
-  - key: CONSOLE_PBKDF_SALT
-    generateValue: true
   - key: PORT
-    value: 9090
+    value: 10000
   - key: MINIO_HOST
     fromService:
       name: minio-server
       type: web
       property: host
+  - key: MINIO_CONSOLE_PORT
+    fromService:
+      name: minio-server
+      type: web
+      envVarKey: CONSOLE_PORT
