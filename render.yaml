@@ -12,7 +12,6 @@ services:
   autoDeploy: false
   disk:
     name: data
-    sizeGB: 5
     mountPath: /data
   envVars:
   - key: MINIO_ROOT_USER
