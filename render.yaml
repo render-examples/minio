@@ -35,6 +35,7 @@ services:
   runtime: docker
   dockerContext: /
   dockerfilePath: ./Dockerfile
+  autoDeploy: false
   envVars:
   - key: PORT
     value: 10000
